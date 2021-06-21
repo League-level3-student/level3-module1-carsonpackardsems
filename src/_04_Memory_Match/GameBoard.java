@@ -19,7 +19,8 @@ public class GameBoard extends JFrame implements ActionListener {
     static Card secondSelectedCard = null;
     
     // 1. Initialize TOTAL_CARDS to 2;
-    static int TOTAL_CARDS = 2;
+    static int TOTAL_CARDS = 52;
+    static int NUMBER_OF_EACH = 13;
     
     ArrayList<Card> cards;
     
@@ -48,9 +49,13 @@ public class GameBoard extends JFrame implements ActionListener {
         // 3. Create TOTAL_CARDS number of objects each with a value of 1.
         //    Also, add action listeners to each Card object and then add each
         //    of the Card objects to the ArrayList of Cards.
-        for (int i = 0; i < TOTAL_CARDS; i++) {
-        Card newCard = new Card(1);
+        for (int i = 0; i < NUMBER_OF_EACH; i++) {
+        	for(int j = 0; j < 4; j++) {
+        Card newCard = new Card(i);
+        newCard.addActionListener(this);
         cards.add(newCard);
+        
+        	}
         }
         
         // 4. Use Collections.shuffle() method to randomize the order of
@@ -75,9 +80,11 @@ public class GameBoard extends JFrame implements ActionListener {
     // 9. Fill in the drawCards method to draw all the cards in the ArrayList.
     //    Run your code and verify 2 cards are displayed and the game works.
     public void drawCards() {
-        
+    	for(int i = 0; i < TOTAL_CARDS; i++) {
+    		cards.get(i).draw();
+    	}
     }
-    
+    //Oh... Thanks
     // 10. 
     // There are 52 cards in a normal sized deck of cards (not counting
     // jokers). There are 4 card suits, each with the numbers 2 to 10 and
