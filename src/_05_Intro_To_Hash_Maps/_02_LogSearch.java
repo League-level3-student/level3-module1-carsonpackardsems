@@ -13,6 +13,9 @@ import java.awt.event.ActionListener;
 
 public class _02_LogSearch extends JFrame implements ActionListener{
      
+	public static void main(String[] args) {
+		
+	}
      // Crate a HashMap of Integers for the keys and Strings for the values.
      HashMap<Integer, String> database = new HashMap<Integer, String>();
      JFrame frame = new JFrame();
@@ -23,8 +26,11 @@ public class _02_LogSearch extends JFrame implements ActionListener{
      JButton deleteEntry = new JButton();
      int Register_ID_Number = 0;
      int Search_ID_Number = 0;
+     int Remove_ID_Number = 0;
+     String Name_Input;
 	public void controlSetup() {
 		frame.add(panel);
+		frame.setVisible(true);
 		addEntry.addActionListener(this);
 		deleteEntry.addActionListener(this);
 		searchDatabase.addActionListener(this);
@@ -34,8 +40,7 @@ public class _02_LogSearch extends JFrame implements ActionListener{
 		panel.add(searchDatabase);
 		panel.add(viewDatabase);
 	}
-     /*Create a GUI with three buttons. 
-     /Button 1: Add Entry
+     /* Button 1: Add Entry
      *      When this button is clicked, use an input dialog to ask the user
      *      to enter an ID number.
      *      After an ID is entered, use another input dialog to ask the user
@@ -45,7 +50,7 @@ public class _02_LogSearch extends JFrame implements ActionListener{
      public void addEntry(){
     	 String Register_ID_Input = JOptionPane.showInputDialog("Please enter an ID number.");
     	 Register_ID_Number = Integer.parseInt(Register_ID_Input);
-    	 String Name_Input = JOptionPane.showInputDialog("Please enter the first and last name of the individual.");
+    	 Name_Input = JOptionPane.showInputDialog("Please enter the first and last name of the individual.");
     	 database.put(Register_ID_Number, Name_Input);
      }
      /* Button 2: Search by ID
@@ -67,17 +72,41 @@ public class _02_LogSearch extends JFrame implements ActionListener{
      *      ID: 433  Name: Oliver Ortega
      *      etc...
      */
-     
-     /* When this is complete, add a fourth button to your window.
-     * Button 4: Remove Entry
+     public void viewList() {
+    	 for(int i = 0; i < database.size(); i++) {
+    		 JOptionPane.showMessageDialog(null, "Name: " + Register_ID_Number + " Name: " + Name_Input + ".");
+    	 }
+     }
+     /* Button 4: Remove Entry
      *      When this button is clicked, prompt the user to enter an ID using
      *      an input dialog.
      *      If this ID exists in the HashMap, remove it. Otherwise, notify the
      *      user that the ID is not in the list. 
      */
+     public void removeEntry() {
+    	 String Remove_ID_Input = JOptionPane.showInputDialog("Please enter the ID number of the individual");
+    	 Remove_ID_Number = Integer.parseInt(Remove_ID_Input);
+    	 if(database.containsKey(Remove_ID_Number)) {
+    	 database.remove(Remove_ID_Input);
+    	 }
+    	 else {
+    		 JOptionPane.showMessageDialog(null, "No such entry exists.");
+    	 }
+}
 @Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getSource() == addEntry) {
+			addEntry();
+		}
+		if(e.getSource() == deleteEntry) {
+			removeEntry();
+		}
+		if(e.getSource() == searchDatabase) {
+			searchEntry();
+		}
+		if(e.getSource() == viewDatabase) {
+			viewList();
+		}
 	}
 }
